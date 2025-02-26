@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState , useContext } from 'react';
 import { LOGO_URL } from '../utils/constants';
 
 import { Link } from 'react-router-dom';
+
+import UserContext from '../utils/userContext';
 
 // import custom hooks
 import useGetOnlineStatus from '../utils/useGetOnlineStatus';
@@ -11,6 +13,11 @@ const Header = () => {
   const [btnName, setBtnName] = useState('login');
 
   const onlineStatus = useGetOnlineStatus() ;
+  
+  const { loggedUser } = useContext(UserContext) ;
+  console.log('User Context --- ' , loggedUser )
+  
+ 
 
   return (
     <div className= "w-full fixed z-1000 bg-slate-50 px-30 py-5 shadow-lg items-center" >
@@ -42,6 +49,9 @@ const Header = () => {
           </li>
           <li>
             Online Status { onlineStatus ? '🟢' : '🔴'}
+          </li>
+          <li>
+            {loggedUser}
           </li>
           <button
             className="login-btn"

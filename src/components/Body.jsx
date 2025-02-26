@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useContext} from 'react';
 import { Link } from 'react-router-dom';
 
 import RestaurentCard , {withOpenLabel} from './RestCard';
@@ -8,7 +8,8 @@ import TopRestCard from './TopRestCard';
 // custom hooks
 import useGetOnlineStatus from '../utils/useGetOnlineStatus';
 
-
+// import UserContext 
+import UserContext from '../utils/userContext';
 
 // body component
 const Body = () => {
@@ -60,7 +61,7 @@ const Body = () => {
     return <Shimmer />;
   }
 
-  console.log('Rest list : ' , restList ) ;
+  const { setUserName , loggedUser } = useContext(UserContext) ;
 
   return (
     <div className="block px-10 py-35 body">
@@ -102,6 +103,12 @@ const Body = () => {
             Top Rated
           </button>
         </div>
+
+        {/* name input */}
+        <div>
+          <input onChange={(e)=>{setUserName(e.target.value)}} value={loggedUser} className='border border-slate-200 px-3 py-1.5 rounded-lg' type="text" placeholder='Enter Name :' />
+        </div>
+
       </div>
 
       <h2 className='text-xl font-semibold '>Top restaurant chains in Kannur</h2>

@@ -1,6 +1,9 @@
 import { AccordionBody } from '@material-tailwind/react';
 import { CLOUDINARY_URL } from '../utils/constants';
 
+// import context 
+// import UserContext from '../utils/userContext';
+
 const ItemCategoryInfo = (props) => {
   const { itemInfo } = props;
   const { name, price, description , imageId } = itemInfo?.card?.info;
@@ -14,6 +17,14 @@ const ItemCategoryInfo = (props) => {
             <h2 className='font-bold text-xl'>{name}</h2>
             <p>₹ {price / 100}</p>
             <p className='lg:max-w-2xl'>{description}</p>
+
+            {/* older way to access context */}
+            {/* <div>
+              <UserContext.Consumer>
+                { (data) => {console.log('context Data - ' , data )}}
+              </UserContext.Consumer>
+            </div> */}
+
           </div>
           <div className='relative rounded-2xl w-36 h-36 '>
            

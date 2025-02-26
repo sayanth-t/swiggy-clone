@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import useGetRestMenu from '../utils/useGetRestMenu';
 
 import ItemCategory from './ItemCategory';
+import { useState } from 'react';
 
 const RestMenu = () => {
   const { restId } = useParams();
@@ -11,7 +12,7 @@ const RestMenu = () => {
   // calling custom hook to fetch data
   const menuData = useGetRestMenu(restId);
 
-  console.log(menuData);
+  const [ showIndex , setShowIndex ] = useState(0) ;
 
   if (menuData === null) {
     return <Shimmer />;
@@ -31,7 +32,7 @@ const RestMenu = () => {
       }
     );
 
-  const openedAccordion = menuItemCategory[0]?.card?.card?.title;
+  // const openedAccordion = menuItemCategory[0]?.card?.card?.title;
 
   return (
     <div className="p-20 pt-28 restMenu-container">
@@ -65,9 +66,9 @@ const RestMenu = () => {
         {/* item categories */}
         <div className="flex justify-center ">
           <div>
-            {menuItemCategory.map((item) => (
-              <div key={item.card?.title}>
-                <ItemCategory opened={openedAccordion} itemInfo={item} />
+            {menuItemCategory.map((item , index ) => (
+              <div key={item.card?.id}>
+                <ItemCategory showItems = { index === showIndex && true }   changeIndex={( )=>{setShowIndex( index === showIndex ? false : index )}}   itemInfo={item}  />
               </div>
             ))}
           </div>

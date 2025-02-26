@@ -6,25 +6,26 @@ import {
 import { SlArrowDown ,  SlArrowUp } from "react-icons/sl";
 
 import ItemCategoryInfo from './ItemList';
-import { useState } from 'react';
 
-const ItemCategory = (props) => {
-    const {itemInfo,opened} = props ;
+
+const ItemCategory = ( { itemInfo , showItems , changeIndex  } ) => {
+  
+  
     const {title,itemCards} = itemInfo?.card?.card ;
 
-    const [ open  , setOpen ] = useState(opened) ;
-
-    const handleOpen = (value) => { setOpen( open===value ? 0 : value ) } ;
+    const handleClick = () => {
+      changeIndex()
+    }
 
   return (
     <div >
-      <Accordion open = { open=== title } >
+      <Accordion open = { showItems  } >
 
         <div className=' bg-white py-5'>
-         <AccordionHeader className='border-0 cursor-pointer' onClick={()=> handleOpen(title)}>
+         <AccordionHeader className='border-0 cursor-pointer' onClick={handleClick} >
           <div className='w-full flex flex-row justify-between items-center '>
             <div>{title} ({itemCards.length})</div>
-            <div>{ open===title ? <SlArrowUp/> : <SlArrowDown/> }</div>
+            <div>{ open===showItems ? <SlArrowUp/> : <SlArrowDown/> }</div>
           </div>
          </AccordionHeader>
         </div>
