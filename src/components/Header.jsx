@@ -1,4 +1,6 @@
 import { useState , useContext } from 'react';
+import { IoMdCart , IoMdHome } from "react-icons/io";
+import { CgProfile } from "react-icons/cg";
 import { LOGO_URL } from '../utils/constants';
 
 import { Link } from 'react-router-dom';
@@ -7,6 +9,10 @@ import UserContext from '../utils/userContext';
 
 // import custom hooks
 import useGetOnlineStatus from '../utils/useGetOnlineStatus';
+
+// importing useSelector for subcscribing cart store
+import { useSelector } from 'react-redux';
+
 
 // header component
 const Header = () => {
@@ -17,7 +23,8 @@ const Header = () => {
   const { loggedUser } = useContext(UserContext) ;
   console.log('User Context --- ' , loggedUser )
   
- 
+  // subscribing cart store
+  const cartItems = useSelector((store) => store.cart.items )  ;
 
   return (
     <div className= "w-full fixed z-1000 bg-slate-50 px-30 py-5 shadow-lg items-center" >
@@ -28,24 +35,19 @@ const Header = () => {
       </div> 
 
       <div className="nav-items-container">
-        <ul className="flex flex-row space-x-5 nav-items ">
+        <ul className="flex flex-row items-center space-x-5 nav-items ">
           <li>
-            <Link to={'/'}>Home</Link>
+            <Link to={'/'}><IoMdHome className='text-2xl' /></Link>
           </li>
+          
           <li>
-            <Link to={'/grocery'}>Grocery</Link>
+            <Link to={'/cart'}><IoMdCart className='text-2xl' /></Link>
+            <div className='absolute top-6 right-[23.4%] text-red-500'>{cartItems.length}</div>
           </li>
+         
+        
           <li>
-            <Link to={'/cart'}>Cart</Link>
-          </li>
-          <li>
-            <Link to={'/about'}>About</Link>
-          </li>
-          <li>
-            <Link to={'/contact'}>Contact</Link>
-          </li>
-          <li>
-            <Link to={'/profile'}>Profile</Link>
+            <Link to={'/profile'}><CgProfile className='text-2xl'  /></Link>
           </li>
           <li>
             Online Status { onlineStatus ? '🟢' : '🔴'}

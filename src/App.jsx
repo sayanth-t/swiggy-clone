@@ -8,11 +8,13 @@ import Contact from './components/Contact.jsx';
 import RestMenu from './components/RestMenu.jsx';
 import Error from './components/Error.jsx';
 import Loading from './components/Loading.jsx';
+import Cart from './components/Cart.jsx';
 
 // import UserContext
 import UserContext from './utils/userContext.js';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 // lazy loading
 const Grocery = lazy(() => import('./components/Grocery.jsx'));
@@ -58,6 +60,11 @@ function App() {
             <Route
               path="/restaurent-menu/:restId"
               element={<RestMenu />}
+              errorElement={<Error />}
+            />
+            <Route
+              path="/cart"
+              element={<Cart />}
               errorElement={<Error />}
             />
           </Routes>
